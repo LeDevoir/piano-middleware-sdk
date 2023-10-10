@@ -21,8 +21,8 @@ class Request
 
     public function __construct(
         string $task,
-        stdClass $content,
-        string $from
+        string $from,
+        array $content = []
     ){
         $this->task = $task;
         $this->content = $content;
@@ -34,12 +34,18 @@ class Request
      */
     public function toJSON()
     {
-        return json_encode(
-            [
-                'task' => $this->task,
-                'content' => $this->content,
-                'from' => $this->from
-            ]
-        );
+        return json_encode($this->toArray());
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return [
+            'task' => $this->task,
+            'content' => $this->content,
+            'from' => $this->from
+        ];
     }
 }

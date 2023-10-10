@@ -2,18 +2,19 @@
 
 namespace LeDevoir\PianoMiddlewareSDK\Request;
 
-use stdClass;
-
 class SignInRequest extends Request
 {
     private const TASK_NAME = 'sign_in';
 
-    public function __construct(stdClass $content, string $from)
-    {
+    public function __construct(
+        string $email,
+        string $uid,
+        string $from
+    ){
         parent::__construct(
             self::TASK_NAME,
-            $content,
-            $from
+            $from,
+            compact('email', 'uid')
         );
     }
 }

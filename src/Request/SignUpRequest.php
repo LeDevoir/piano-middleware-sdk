@@ -8,12 +8,14 @@ class SignUpRequest extends Request
 {
     private const TASK_NAME = 'sign_up';
 
-    public function __construct(stdClass $content, string $from)
-    {
+    public function __construct(
+        string $from,
+        string $email
+    ){
         parent::__construct(
             self::TASK_NAME,
-            $content,
-            $from
+            $from,
+            compact('email')
         );
     }
 }

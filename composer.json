@@ -19,7 +19,13 @@
       "LeDevoir\\PianoMiddlewareSDK\\": "src/"
     }
   },
-  "minimum-stability": "stable",
   "require-dev": {
-  }
+    "phpunit/phpunit": "^7.1"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "LeDevoir\\PianoMiddlewareSDK\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable"
 }

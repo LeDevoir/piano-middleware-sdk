@@ -31,11 +31,11 @@ class Client
 
     /**
      * @param Request $request
-     * @return void
+     * @return array
      */
-    public function sendRequest(Request $request)
+    public function sendRequest(Request $request): array
     {
-        $this->post(
+        return $this->post(
             sprintf(
                 '%s?%s',
                 $this->baseUrl,
