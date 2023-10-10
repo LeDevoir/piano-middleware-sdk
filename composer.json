@@ -1,0 +1,25 @@
+{
+  "name": "ledevoir/piano-middleware-sdk",
+  "description": "SDK to interact with Piano middleware",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "pbourdeau",
+      "email": "pbourdeau@ledevoir.com"
+    }
+  ],
+  "require": {
+    "php": ">= 7.1",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "LeDevoir\\PianoMiddlewareSDK\\": "src/"
+    }
+  },
+  "minimum-stability": "stable",
+  "require-dev": {
+  }
+}
