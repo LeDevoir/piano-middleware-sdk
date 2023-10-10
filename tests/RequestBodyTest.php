@@ -35,12 +35,28 @@ JSON;
 
     /**
      * @test
+     * @return void
+     */
+    public function signInBodyWithEmptyUid()
+    {
+        $request = new SignInRequest(
+            'bogus@ledevoir.com',
+            null,
+            'cms'
+        );
+
+        $unserialized = $request->toArray();
+        $this->assertArrayNotHasKey('uid', $unserialized['content']);
+    }
+
+    /**
+     * @test
      */
     public function signUpBody()
     {
         $request = new SignUpRequest(
-            'very_obscure_machine',
-            'bogus@ledevoir.com'
+            'bogus@ledevoir.com',
+            'very_obscure_machine'
         );
 
         $unserialized = $request->toArray();

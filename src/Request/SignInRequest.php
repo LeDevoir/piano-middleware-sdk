@@ -8,13 +8,18 @@ class SignInRequest extends Request
 
     public function __construct(
         string $email,
-        string $uid,
+        ?string $uid,
         string $from
     ){
+        $context = array_merge(
+            compact('email'),
+            $uid ? compact('uid') : []
+        );
+
         parent::__construct(
             self::TASK_NAME,
             $from,
-            compact('email', 'uid')
+            $context
         );
     }
 }
