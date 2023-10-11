@@ -2,69 +2,36 @@
 
 namespace LeDevoir\PianoMiddlewareSDK;
 
-use LeDevoir\PianoMiddlewareSDK\Request\Request;
-
-class Client
+/**
+ * HTTP JSON cURL client
+ */
+class CurlClient
 {
     /**
-     * @var string
-     */
-    private $baseUrl;
-    /**
-     * @var int
-     */
-    private $port;
-    /**
-     * @var string
-     */
-    private $accessCode;
-
-    public function __construct(
-        string $baseUrl,
-        string $accessCode,
-        int $port = 443
-    ){
-        $this->baseUrl = $baseUrl;
-        $this->port = $port;
-        $this->accessCode = $accessCode;
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    public function sendRequest(Request $request): array
-    {
-        return $this->post(
-            sprintf(
-                '%s?%s',
-                $this->baseUrl,
-                http_build_query(['code' => $this->accessCode])
-            ),
-            $this->port
-        );
-    }
-
-    /**
-     * Send a non-secure POST (no TLS)
-     *
      * @param string $url
+     * @param int $port
+     * @param array $queryParams
      * @param array $data
      * @param array $headers
-     * @param int $port
      * @return array
      */
-    private function post(
+    protected function post(
         string $url,
         int $port,
+        array $queryParams = [],
         array $data = [],
         array $headers = []
     ): array {
         try {
             $curl = curl_init();
+
             curl_setopt_array($curl,
                 [
-                    CURLOPT_URL => $url,
+                    CURLOPT_URL => sprintf(
+                        '%s?%s',
+                        $url,
+                        http_build_query($queryParams)
+                    ),
                     CURLOPT_PORT =>  $port,
                     CURLOPT_HTTPHEADER => array_merge(
                         [
