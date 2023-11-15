@@ -7,13 +7,13 @@ class RefreshTokenRequest extends Request
     private const TASK_NAME = 'refresh_token';
 
     public function __construct(
-        string $refreshToken,
+        string $token,
         string $from
     ){
         parent::__construct(
             self::TASK_NAME,
             $from,
-            compact('refreshToken')
+            compact('token')
         );
     }
 }
