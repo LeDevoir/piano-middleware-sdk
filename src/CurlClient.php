@@ -13,6 +13,7 @@ class CurlClient
      * @param array $queryParams
      * @param array $data
      * @param array $headers
+     * @param array $options
      * @return array
      */
     protected function post(
@@ -20,7 +21,8 @@ class CurlClient
         int $port,
         array $queryParams = [],
         array $data = [],
-        array $headers = []
+        array $headers = [],
+        array $options = []
     ): array {
         try {
             $curl = curl_init();
@@ -42,8 +44,8 @@ class CurlClient
                     ),
                     CURLOPT_POST => true,
                     CURLOPT_POSTFIELDS => json_encode($data),
-                    CURLOPT_TIMEOUT => 5,
-                    CURLOPT_CONNECTTIMEOUT => 3,
+                    CURLOPT_TIMEOUT => $options[CURLOPT_TIMEOUT] ?? 10,
+                    CURLOPT_CONNECTTIMEOUT => $options[CURLOPT_CONNECTTIMEOUT] ?? 5,
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_HEADER => false
                 ]

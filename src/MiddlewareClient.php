@@ -41,7 +41,18 @@ class MiddlewareClient extends CurlClient
      */
     public function signIn(SignInRequest $request): AccessTokenResponse
     {
-        return new AccessTokenResponse($this->sendRequest($request));
+        return new AccessTokenResponse(
+            $this->post(
+                $this->baseUrl,
+                $this->port,
+                ['code' => $this->accessCode],
+                $request->toArray(),
+                [
+                    CURLOPT_TIMEOUT => 10,
+                    CURLOPT_CONNECTTIMEOUT => 10
+                ]
+            )
+        );
     }
 
     /**
@@ -50,7 +61,18 @@ class MiddlewareClient extends CurlClient
      */
     public function signUp(SignUpRequest $request): AccessTokenResponse
     {
-        return new AccessTokenResponse($this->sendRequest($request));
+        return new AccessTokenResponse(
+            $this->post(
+                $this->baseUrl,
+                $this->port,
+                ['code' => $this->accessCode],
+                $request->toArray(),
+                [
+                    CURLOPT_TIMEOUT => 10,
+                    CURLOPT_CONNECTTIMEOUT => 10
+                ]
+            )
+        );
     }
 
     /**
@@ -59,25 +81,33 @@ class MiddlewareClient extends CurlClient
      */
     public function refreshToken(RefreshTokenRequest $request): AccessTokenResponse
     {
-        return new AccessTokenResponse($this->sendRequest($request));
+        return new AccessTokenResponse(
+            $this->post(
+                $this->baseUrl,
+                $this->port,
+                ['code' => $this->accessCode],
+                $request->toArray(),
+                [
+                    CURLOPT_TIMEOUT => 10,
+                    CURLOPT_CONNECTTIMEOUT => 10
+                ]
+            )
+        );
     }
 
     public function logout(LogoutRequest $request): LogoutResponse
     {
-        return new LogoutResponse($this->sendRequest($request));
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    private function sendRequest(Request $request): array
-    {
-        return $this->post(
-            $this->baseUrl,
-            $this->port,
-            ['code' => $this->accessCode],
-            $request->toArray()
+        return new LogoutResponse(
+            $this->post(
+                $this->baseUrl,
+                $this->port,
+                ['code' => $this->accessCode],
+                $request->toArray(),
+                [
+                    CURLOPT_TIMEOUT => 10,
+                    CURLOPT_CONNECTTIMEOUT => 10
+                ]
+            )
         );
     }
 }
